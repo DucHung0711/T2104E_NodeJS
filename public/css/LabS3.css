@@ -1,0 +1,38 @@
+.container{
+    margin: auto;
+    width: 1000px;
+    font-family: 'Roboto', sans-serif;
+}
+.top{
+    background-color: #868181;
+    width: 600px;
+    padding-left: 400px;
+    padding-top: 50px;
+    height: 150px;
+}
+.avatar img{
+    border-radius: 50%;
+}
+.contact img{
+    width: 30px;
+    height: 24px;
+}
+.infor{
+    line-height: 2.5;
+}
+.left{
+    float: left;
+    background-color: darkgray;
+    margin: -150px 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    height: 1500px;
+    width: 250px;
+}
+.right{
+    background-color: #cdcbcb;
+    padding-top: 15px;
+    height: 1500px;
+    width: 1000px;
+}

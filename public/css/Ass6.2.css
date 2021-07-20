@@ -1,0 +1,109 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #14182a !important;
+    font-family: "Josefin Sans" !important;
+}
+.header{
+    min-height: 80px;
+    background-color: #1b2039;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: 80px;
+    z-index: 1;
+
+}
+.header .MusicStore{
+    text-decoration: none;
+    color: white;
+    font-size: 35px;
+    font-weight: 700;
+}
+.header .Trendingsong{
+    float: right;
+    text-decoration: none;
+    font-size: 20px;
+    color: #2cc8e5;
+}
+.header .title{
+    float: left;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    max-width: 500px;
+    text-overflow: ellipsis;/*Phần bị ẩn đi thay bawgf dấu 3 chấm*/
+}
+.recently-played{
+    text-decoration: none;
+    font-size: 20px;
+    color: #2cc8e5;
+    position: absolute;
+    padding-top: 100px;
+}
+.recently-played h3{
+    line-height: 2.5;
+    border-bottom: 25px;
+}
+.featured-albums h3{
+    line-height: 2.5;
+    border-bottom: 25px;
+}
+.list {
+    border-bottom: 2px solid #8b8989;
+    margin-bottom: 50px;
+}
+.trending-songs h3{
+    line-height: 2.5;
+    border-bottom: 25px;
+}
+.featured-albums{
+    text-decoration: none;
+    font-size: 20px;
+    color: #2cc8e5;
+}
+.trending-songs{
+    text-decoration: none;
+    font-size: 20px;
+    color: #2cc8e5;
+}
+.music{
+    text-align: center;
+    color: darkgray;
+    margin-bottom: 30px;
+}
+.music img{
+    width: 100%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.music a{
+    color: white;
+    font-size: 15px;
+    line-height: 50px;
+    text-decoration: none;
+}
+.trending-songs-img{
+    padding: 50px 200px;
+    text-align: center;
+    margin: 50px;
+    color: white;
+    border-bottom: 2px solid #8b8989;
+}
+.footer{
+    color: white;
+}
+.footer h3{
+    line-height: 2.5;
+    color: #2cc8e5;
+}
+.music img:hover{
+    --size
+}
+
+

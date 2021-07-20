@@ -1,0 +1,27 @@
+p{
+    color: rgb(48, 213, 197);/*rdb hex(1 2 3 4 5 a b c )*/
+    font-size: 25px;/*co chu*/
+    font-family: 'Roboto', sans-serif;/*loai chu*/
+    font-weight: 400;/*do dam nhat =(100 300 400(normal) 500 600 700(bold) 800)*/
+    text-decoration: none;/*co gach k*/
+    text-transform: capitalize;/*viet in thuong-in hoa*/
+    line-height: 45px;/*do cao dong*/
+    text-indent: 20px;/*lui dau doan van*/
+    font-style: none;/*in kieu gi(in nghieng)*/
+    text-align: right;/*can le*/
+
+    background-color: #78;/*mau nen*/
+    background-image: url (../img/anh1.jpg)/*("....duong dan den anh can goi")*/;/*anh nen*/
+    background-size: ;/*cover*/
+    background-repeat: no-repeat;/*lap anh(repeat-x-->lap chieu ngang,repeat-y-->lap chieu doc)*/
+    /*
+        Nguyên lí cây thư mục(con kiến leo cây)
+        ../đi lên
+        thư mục/--> đi sang
+        tên tep --> đi xuống
+    */
+}
+
+h1{
+    color: red;
+}

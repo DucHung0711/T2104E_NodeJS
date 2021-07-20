@@ -1,0 +1,93 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #f5f1f1;
+    font-size: 14px;
+    font-family: 'Big Shoulders Display', cursive ;
+}
+header{position: relative}
+header .menu{
+    background-color: #f1d092;
+    top: 0;
+    left:0;
+    right:0;
+    line-height: 80px;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    display: block;
+}
+header .menu h1{
+    padding-left: 200px;
+}
+header .list{
+    margin-top: 25px;
+}
+header h1{
+    color: white;
+    font-size: 80px;
+}
+header .list a{
+    color: white;
+}
+header li {
+    display: inline;
+    float: left;
+    list-style: none;
+
+    font-size: 20px;
+    text-align: center;
+}
+li a{
+    width: 180px;
+    display: block;
+    /*padding: 14px 16px;*/
+    text-decoration: none;
+}
+header .container{
+    margin-top: 100px;
+    background-image: url("https://free.vector6.com/wp-content/uploads/2020/04/Vector-dong-vat-dep-527.jpg");
+    background-size: cover;
+    /*background-repeat: no-repeat;*/
+    height: 800px;
+}
+header .slider{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+section .container .main{
+    background-color: white;
+    margin-top: 80px;
+    padding:50px 100px;
+
+}
+section .container img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    width: 50%;
+}
+section .container p{
+    font-size: 35px;
+}
+section .container h2{
+    font-size: 50px;
+}
+section .container .title {
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+section .container h1{
+    font-size: 60px;
+}
+/****/
+
+
+
+

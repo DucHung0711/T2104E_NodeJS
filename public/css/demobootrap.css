@@ -1,0 +1,27 @@
+.box{
+    float: left;
+    width: 1000px;
+}
+.child-1{
+    background-color: red;
+    /*width: 33.33%;*/
+    /*float: left;*/
+}
+.child-2{
+    background-color: green;
+    /*width: 33.33%;*/
+    /*float: left;*/
+}
+.child-3{
+    background-color: blue;
+    /*width: 33.33%;*/
+    /*float: left;*/
+}
+body{
+    width: 1000px;
+}
+.container{
+    float: left;
+
+}
+

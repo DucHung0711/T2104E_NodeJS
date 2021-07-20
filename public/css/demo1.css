@@ -1,0 +1,11 @@
+h3{
+    color: magenta;
+    font-size: 25px;
+    text-decoration: underline;
+    font-family: 'Baloo Tammudu 2', cursive;
+}
+p{
+    color: none;
+    font-size: 25px;
+    font-family: 'Baloo Tammudu 2', cursive;
+}

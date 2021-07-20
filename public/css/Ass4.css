@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 1000px;
+    margin: 50px auto;
+    background-color: #e4e4e4;
+    font-family: "Cuprum", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+header{
+
+    display: block;
+}
+.header{
+    background-image: url(https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80);
+    background-size: 100%;
+    height: 500px;
+    border-radius: 25px 25px 0 0;/*đổ bóng cho header*/
+    -webkit-border-radius: 25px 25px 0 0;
+}
+.section{
+    float: left;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 50px 50px 300px #0e0e0e;
+}
+.container{
+    padding: 20px 100px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}
+.logo{
+    float: left;
+    font-size: 25px;
+    font-weight: 700;
+}
+.logo a{
+    color: #ffffff;
+    text-decoration: none;
+    text-shadow: 0 5px #000000;
+}
+.nav{
+    float: left;
+    margin-left: 200px;
+}
+.nav li{
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+
+.header .nav a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-shadow: 0 0 5px #000000;/*đổ bóng*/
+}
+.toplinks{
+    float: right;
+}
+.toplinks li{
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+.toplinks .fab{
+    color: #ffffff;
+    text-shadow: 0 5px #000000;
+}
+.product{
+    margin-top: 5%;
+}
+.left{
+    float: left;
+    width: 30%;
+    margin-right: 5%;
+}
+.left img{
+    max-width: 100%;
+}
+.center{
+    float: left;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.center img{
+    max-width: 100%;
+}
+.right{
+    float: right;
+    width: 30%;
+    margin-left: 5%;
+}
+.right img{
+    max-width: 100%;
+}
+.product h4{
+    opacity: 0.5;/*độ đậm nhạt của chữ*/
+    text-transform: uppercase;/*định dạng chứ in hoa*/
+    line-height: 3;/*để content ra giữa từ trên xuống cua khối (giãn dòng)*/
+}
+.product h3{
+    text-transform: lowercase;
+    font-weight: 700;
+    font-size: 20px;
+}
+.product p{
+    line-height: 1.5;
+    opacity: 0.75;
+}
+.product a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: gold;
+    line-height: 4;
+}
+.footer{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 0 0 25px 25px;
+}
+.applinks{
+    margin-left: 30%;
+}
+.applinks ul{
+    justify-content: center;
+}
+.applinks li {
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+.applinks .fab{
+    color: #000000;
+}
+.footer .nav{
+    margin-left: 30%;
+}
+.footer a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 12px;
+    line-height: 3;
+}
+
+
