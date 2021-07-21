@@ -37,8 +37,9 @@ app.get("/",function (req,res){ // trang chu
     // res.send("<html><head><title</head></html>"); // html- chỉ là 1 chuỗi đối với máy chủ
     // res.sendFile(__dirname+"/public/demobootstrap.html");  //__dirname -> xuất cho chúng ta 1 chuỗi đường dẫn chính xác trên máy tính đến thư mục này
     count++;
-    res.render("home",{
-        count: count
+    res.render("ketoan",{
+        products:products
+        //count: count
     });// tu dong hieu de lay file home.ejs trong thu muc views
 });
 
