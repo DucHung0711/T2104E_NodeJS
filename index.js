@@ -53,9 +53,9 @@ app.get("/chi-tiet", function (reg,res){
     var masp = req.query.id;
     //khi co id,  tim kiem theo id trong array
     var p = {};
-    for(var i=0;i<products[i].length;i++){
+    for(var i=0;i<products.length;i++){
         if(products[i].id == masp){
-            p= products[i];
+            p = products[i];
             break;
         }
     }
@@ -63,17 +63,16 @@ app.get("/chi-tiet", function (reg,res){
     res.render("chi-tiet",{
         masp:masp,
         p: p
-    })
+    });
 });
 
 //su dung tham so tinh
-app.get("/chi-tiet2/: id", function (reg,res){
-    var masp = req.query.id;
-    //khi co id,  tim kiem theo id trong array
+app.get("/chi-tiet2/:id", function (reg,res){
+    var masp = req.params.id;
     var p = {};
-    for(var i=0;i<products[i].length;i++){
+    for(var i=0;i<products.length;i++){
         if(products[i].id == masp){
-            p= products[i];
+            p = products[i];
             break;
         }
     }
