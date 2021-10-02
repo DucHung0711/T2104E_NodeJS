@@ -89,6 +89,7 @@
 
 
 //------------------------------------------------------
+
 var express = require("express");
 var app = express(); // tao 1 ung dung tu express module
 var port = process.env.PORT || 5000;
@@ -102,11 +103,12 @@ app.set("view engine","ejs");// Báo rằng sẽ sử dụng ejs làm view engin
 var sql = require('mssql');
 // khai bao de ket noi database
 var mssql = require("mssql");
+const {render} = require("ejs");
 var config = { // thong tin may chu
     server: "localhost",
     user:"sa",
     password:"sa123",
-    database:"Ass5",
+    database:"SQL",
     stream: false,
     port:1433,
     options: {
@@ -118,9 +120,13 @@ var config = { // thong tin may chu
 };
 var ConnectionConfig = {
     server: 'localhost',
-    authentication: { type: 'default', options: { userName: 'sa', password: 'sa123' } },
-    options: { encrypt:false }}
-
+    authentication: {
+        type: 'default',
+        options: { userName: 'sa', password: 'sa123' }
+    },
+    database: 'SQL',
+    options: { encrypt:false }
+};
 mssql.connect(ConnectionConfig,function (err){
     if(err) console.log(err)
     else console.log("Connected")
@@ -158,11 +164,51 @@ app.get("/khach-hang",function (req,res){
         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
     })
 });
+app.get("/hang-hoa",function (req,res){
+    // lay thong tin tu form tim kiem
+    var kw = req.query.keyword||"";
+    // can lay danh sach khach hang
+    var txt_sql = "select * from HangHoa where TenSP like '%"+kw+"%';";
+    sql.query(txt_sql,function (err,rs){ // callback
+        if(err) res.send(err);
+        else res.render("home",{
+            hanghoa:rs.recordset// rows.recordset : 1 array, mỗi element là 1 object từ table
+        })
+    })
+});
+app.get("/chi-tiet-sp",function (req,res){
+    var id = req.query.id;
+    var txt_sql = "select * from HangHoa where MaSP = "+id+";";
+    sql.query(txt_sql,function (err,rs){
+        if(err) res.send(err);
+        else if(rs.recordset.length > 0){
+            res.render("chi-tiet",{
+                p:rs.recordset[0]
+            })
+        }else res.status(404).send('Not found?');
+    })
+});
+app.get("/don-hang",function (req,res){
+    // can lay danh sach khach hang
+    var txt_sql = "select * from DonHang;";
+    sql.query(txt_sql,function (err,rs){ // callback
+        if(err) res.send(err);
+        else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
+    })
+});
+app.get("/don-hang-san-pham",function (req,res){
+    //can lay danh sach khach hang
+    var txt_sql = "select  * from DonHangSanPham;";
+    sql.query(txt_sql,function (err,rs){
+        if(err) res.send(err);
+        else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
+    })
+});
 // them khach hang
 // 1. Tao giao dien form de nap thong tin khach hang
-// app.get("/them-khach-hang",function (req,res){
-//     res.render("themkhachhang");
-// })
+app.get("/them-khach-hang",function (req,res){
+    res.render("themkhachhang");
+})
 // // // 2. Tao routing nhận dữ liệu từ form gửi lên
 // var bodyParser = require("body-parser");
 // app.use(bodyParser.json());
@@ -178,7 +224,7 @@ app.get("/khach-hang",function (req,res){
 //         else res.redirect("/khach-hang");
 //     })
 // })
-// // // liet ke danh sachs hang hoa
+// liet ke danh sachs hang hoa
 // app.get("/hang-hoa",function (req,res){
 //     // lay thong tin tu form tim kiem
 //     var kw = req.query.keyword||"";
@@ -203,15 +249,15 @@ app.get("/khach-hang",function (req,res){
 //         }else res.status(404).send('Not found?');
 //     })
 // })
-// // // liet ke danh sach don hang
-// app.get("/don-hang",function (req,res){
-//     // can lay danh sach khach hang
-//     var txt_sql = "select * from DonHang inner join KhachHang on DonHang.KhachHangID = KhachHang.ID;";
-//     sql.query(txt_sql,function (err,rs){
-//         if(err) res.send(err);
-//         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
-//     })
-// });
+ // liet ke danh sach don hang
+app.get("/don-hang1",function (req,res){
+    // can lay danh sach khach hang
+    var txt_sql = "select * from DonHang inner join KhachHang on DonHang.KhachHangID = KhachHang.ID;";
+    sql.query(txt_sql,function (err,rs){
+        if(err) res.send(err);
+        else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
+    })
+});
 // app.get("/tao-don-hang",function (req, res) {
 //     var txt_sql = "select * from KhachHang;select * from HangHoa;";
 //     sql.query(txt_sql,function (err,rs){ // callback

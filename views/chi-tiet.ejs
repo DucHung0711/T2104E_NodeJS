@@ -7,16 +7,18 @@
     <!-- Latest compiled and minified CSS -->
     <%- include("head")%>
     <link rel="stylesheet" href="css/demobootstrap.css" type="text/css"/>
-    <link rel="stylesheet" href="css/assignment3.css" type="text/css"/>
+    <link rel="stylesheet" href="css/Ass3.css" type="text/css"/>
 </head>
 <body>
-
+<%- include("header")%>
+<%- include("nav")%>
 <section class="main col-md-12">
     <div class="container">
-        <h1 <%= p.name %>></h1>
-        <img src="<%= p.image %>"/>
+        <h1><%= p.TenSP %></h1>
+        <p><%= p.MoTa %></p>
     </div>
 </section>
-
+<%- include("footer")%>
+<script type="text/javascript" src="public/js/jquery.js"></script>
 </body>
 </html>
