@@ -189,7 +189,7 @@ app.post("/luu-khach-hang",function (req, res) {
     })
 }); // design pattern -- DAO pattern -- ORM -- SQL injection
 
-
+// liet ke danh sachs hang hoa
 app.get("/hang-hoa",function (req,res){
     // lay thong tin tu form tim kiem
     var kw = req.query.keyword||"";
@@ -214,6 +214,8 @@ app.get("/chi-tiet-sp",function (req,res){
         }else res.status(404).send('Not found?');
     })
 });
+
+
 app.get("/don-hang",function (req,res){
     // can lay danh sach khach hang
     var txt_sql = "select * from DonHang;";
@@ -222,6 +224,8 @@ app.get("/don-hang",function (req,res){
         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
     })
 });
+
+
 app.get("/don-hang-san-pham",function (req,res){
     //can lay danh sach khach hang
     var txt_sql = "select  * from DonHangSanPham;";
@@ -231,33 +235,7 @@ app.get("/don-hang-san-pham",function (req,res){
     })
 });
 
-
-// liet ke danh sachs hang hoa
-// app.get("/hang-hoa",function (req,res){
-//     // lay thong tin tu form tim kiem
-//     var kw = req.query.keyword||"";
-//     // can lay danh sach khach hang
-//     var txt_sql = "select * from HangHoa where TenSP like '%"+kw+"%';";
-//     sql.query(txt_sql,function (err,rs){
-//         if(err) res.send(err);
-//         else res.render("home",{
-//             hanghoa:rs.recordset // array
-//         })
-//     })
-// });
-// app.get("/chi-tiet-sp",function (req,res){
-//     var id = req.query.id;
-//     var txt_sql = "select * from HangHoa where MaSP = "+id+";";
-//     sql.query(txt_sql,function (err,rs){
-//         if(err) res.send(err);
-//         else if(rs.recordset.length > 0){
-//             res.render("chitiet",{
-//                 p:rs.recordset[0]
-//             })
-//         }else res.status(404).send('Not found?');
-//     })
-// })
- // liet ke danh sach don hang
+ // liet ke danh sach don hang - khachhang
 app.get("/don-hang1",function (req,res){
     // can lay danh sach khach hang
     var txt_sql = "select * from DonHang inner join KhachHang on DonHang.KhachHangID = KhachHang.ID;";
@@ -266,35 +244,37 @@ app.get("/don-hang1",function (req,res){
         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
     })
 });
-// app.get("/tao-don-hang",function (req, res) {
-//     var txt_sql = "select * from KhachHang;select * from HangHoa;";
-//     sql.query(txt_sql,function (err,rs){ // callback
-//         if(err) res.send(err);
-//         else res.render("taodonhang",{
-//             khachhangs: rs.recordsets[0],
-//             hanghoas: rs.recordsets[1]
-//         });
-//     })
-//
-// })
-// app.post("/luu-don-hang",function (req, res) {
-//     var khID = req.body.KhachHangID;
-//     var spIDs = req.body.spIDs;// array
-//     var spIDs_array = "("+spIDs.toString()+")";
-//     var txt_sql = "insert into DonHang(NgayDat,KhachHangID,TongTien) values(GETDATE(),"+khID+",(select sum(Gia) from HangHoa where MaSP in "+spIDs_array+"));";
-//     txt_sql += "select top 1 MaSoDH from Ass5_DonHang order by MaSoDH desc";
-//     sql.query(txt_sql,function (err, rs) {
-//         if(err) res.send("Error");
-//         else{
-//             var MaSoDH = rs.recordset[0].MaSoDH;
-//             var txt_sql2 = "";
-//             for(var i=0;i<spIDs.length;i++){
-//                 txt_sql2+= "insert into DonHangSanPham(MaSoDH,MaSp,SoLuong,ThanhTien) values("+MaSoDH+","+spIDs[i]+",1,(select Gia from HangHoa where MaSP = "+spIDs[i]+"));";
-//             }
-//             sql.query(txt_sql2,function (err2, rs2) {
-//                 if(err2) res.send(err2);
-//                 else res.send("Success");
-//             })
-//         }
-//     })
-// })
+// tao don hang
+app.get("/tao-don-hang",function (req,res){
+    var txt_sql = "select * from KhachHang;select * from HangHoa;";
+    sql.query(txt_sql,function (err,rs){ // callback
+        if(err) res.send(err);
+        else res.render("taodonhang",{
+            khachhangs: rs.recordsets[0],
+            hanghoas: rs.recordsets[1]
+        });
+    })
+})
+// luu don hang
+app.post("/luu-don-hang",function (req, res) {
+    var khID = req.body.KhachHangID;
+    var spIDs = req.body.spIDs;// array , mang tren javascrip
+    var spIDs_array = "("+spIDs.toString()+")";// array , mang trong SQL
+    var txt_sql = "insert into DonHang(NgayDat,KhachHangID,TongTien) values(GETDATE(),"+khID+",(select sum(Gia) from HangHoa where MaSP in "+spIDs_array+"));";
+    txt_sql += "select top 1 MaSoDH from DonHang order by MaSoDH desc";
+    sql.query(txt_sql,function (err, rs) {
+        if(err) res.send("Error");
+        else{
+            var MaSoDH = rs.recordset[0].MaSoDH;
+            var txt_sql2 = "";
+            for(var i=0;i<spIDs.length;i++){
+                txt_sql2+= "insert into DonHangSanPham(MaSoDH,MaSp,SoLuong,ThanhTien) values("+MaSoDH+","+spIDs[i]+",1,(select Gia from HangHoa where MaSP = "+spIDs[i]+"));";
+            }
+            sql.query(txt_sql2,function (err2, rs2) {
+                if(err2) res.send(err2);
+                else res.send("Success");
+            })
+        }
+    })
+})
+
