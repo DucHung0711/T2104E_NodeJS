@@ -101,6 +101,7 @@ app.use(express.static("public"));
 app.set("view engine","ejs");// Báo rằng sẽ sử dụng ejs làm view engine
 //----------------------------------------------
 var sql = require('mssql');
+
 // khai bao de ket noi database
 var mssql = require("mssql");
 const {render} = require("ejs");
@@ -127,6 +128,7 @@ var ConnectionConfig = {
     database: 'SQL',
     options: { encrypt:false }
 };
+// ket noi voi database
 mssql.connect(ConnectionConfig,function (err){
     if(err) console.log(err)
     else console.log("Connected")
@@ -150,7 +152,8 @@ mssql.connect(ConnectionConfig,function (err){
 //     if(err) console.log(err);
 //     else console.log("connected database!");
 // });
-// // tao doi tuong truy van du lieu
+
+// tao doi tuong truy van du lieu
 var sql = new mssql.Request();
 //routing - bo dinh tuyen (nhan vien cua van phong)
 app.get("/",function (req,res){ // trang chu
@@ -164,11 +167,34 @@ app.get("/khach-hang",function (req,res){
         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
     })
 });
+// them khach hang
+// 1. Tao giao dien form de nap thong tin khach hang
+app.get("/them-khach-hang",function (req,res){
+    res.render("themkhachhang");
+});
+// 2. Tao routing nhận dữ liệu từ form gửi lên
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post("/luu-khach-hang",function (req, res) {
+    var ten = req.body.TenKH;
+    var dt = req.body.DienThoai;
+    var dc = req.body.DiaChi;
+    // res.send(ten+"-"+dt+"-"+dc);
+    var txt_sql = "insert into KhachHang(TenKH,DienThoai,DiaChi) values(N'"+ten+"','"+dt+"',N'"+dc+"')";
+    sql.query(txt_sql,function (err, rs) {
+        if(err) res.status(403).send('Errors');
+        else res.redirect("/khach-hang");
+    })
+}); // design pattern -- DAO pattern -- ORM -- SQL injection
+
+
 app.get("/hang-hoa",function (req,res){
     // lay thong tin tu form tim kiem
     var kw = req.query.keyword||"";
     // can lay danh sach khach hang
-    var txt_sql = "select * from HangHoa where TenSP like '%"+kw+"%';";
+    var txt_sql = "select * from HangHoa where TenSP like N'%"+kw+"%';";
     sql.query(txt_sql,function (err,rs){ // callback
         if(err) res.send(err);
         else res.render("home",{
@@ -204,26 +230,8 @@ app.get("/don-hang-san-pham",function (req,res){
         else res.send(rs.recordset);// rows.recordset : 1 array, mỗi element là 1 object từ table
     })
 });
-// them khach hang
-// 1. Tao giao dien form de nap thong tin khach hang
-app.get("/them-khach-hang",function (req,res){
-    res.render("themkhachhang");
-})
-// // // 2. Tao routing nhận dữ liệu từ form gửi lên
-// var bodyParser = require("body-parser");
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-//
-// app.post("/luu-khach-hang",function (req, res) {
-//     var ten = req.body.tenKH;
-//     var dt = req.body.DienThoai;
-//     var dc = req.body.DiaChi;
-//     var txt_sql = "insert into KhachHang(TenKH,DienThoai,DiaChi) values(N'"+ten+"','"+dt+"',N'"+dc+"')";
-//     sql.query(txt_sql,function (err, rs) {
-//         if(err) res.status(403).send('Errors');
-//         else res.redirect("/khach-hang");
-//     })
-// })
+
+
 // liet ke danh sachs hang hoa
 // app.get("/hang-hoa",function (req,res){
 //     // lay thong tin tu form tim kiem
